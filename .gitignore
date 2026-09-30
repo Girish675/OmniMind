@@ -80,3 +80,4 @@ android/app/src/main/assets/models/*.gguf
 logs/
 .system_generated/
 scratch/
+tmp_test_*/

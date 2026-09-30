@@ -1,0 +1,15 @@
+{
+  "name": "omnimind-monorepo",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "server": "node server/index.js",
+    "web:dev": "npm run dev --prefix web",
+    "web:build": "npm run build --prefix web",
+    "desktop": "node desktop/desktop_launcher.js",
+    "test:server": "node --test server/test/*.test.js",
+    "test:android": "cd android && gradlew.bat test",
+    "test": "npm run test:server"
+  }
+}

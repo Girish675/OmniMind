@@ -7,7 +7,32 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  server-and-web-tests:
+    name: Local Server & Web Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run Server API & Integration Tests
+        run: |
+          node --test server/test/*.test.js
+
+      - name: Build Web Application
+        run: |
+          cd web
+          npm ci
+          npm run build
+
+  android-build-and-test:
+    name: Android Build & Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -24,10 +49,25 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Verify Project Scaffolding
+      - name: Install Android NDK
         run: |
-          echo "OmniMind bootstrap validation"
-          test -f version.json
-          test -f README.md
-          test -f DESIGN.md
-          test -f IMPLEMENTATION.md
+          sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
+
+      - name: Make Gradle Wrapper Executable
+        run: chmod +x android/gradlew
+
+      - name: Run Android Unit Tests
+        run: |
+          cd android
+          ./gradlew test
+
+      - name: Assemble Android Debug APK
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: omnimind-android-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk

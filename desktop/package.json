@@ -1,0 +1,17 @@
+{
+  "name": "omnimind-desktop",
+  "version": "0.1.0-alpha.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node desktop_launcher.js",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0-rc",
+    "@tauri-apps/plugin-shell": "^2.0.0-rc"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0-rc"
+  }
+}

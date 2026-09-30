@@ -1,0 +1,21 @@
+[package]
+name = "omnimind-desktop"
+version = "0.1.0-alpha.1"
+description = "OmniMind Desktop - Private Local LLM Application"
+authors = ["Girish675 <pediredlagirishkumar@gmail.com>"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2.0.0-rc", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0-rc", features = ["tray-icon"] }
+tauri-plugin-shell = "2.0.0-rc"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.36", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "stream"] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
