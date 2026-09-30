@@ -1,0 +1,82 @@
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+
+# IDE / Editor Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+.project
+.classpath
+.settings/
+
+# Android / Gradle
+.gradle/
+build/
+*/build/
+*/*/build/
+*.apk
+*.aab
+local.properties
+.cxx/
+*/.cxx/
+*/*/.cxx/
+captures/
+.externalNativeBuild/
+*/.externalNativeBuild/
+*/*/.externalNativeBuild/
+
+# Native Builds / CMake
+build*/
+out/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.cmake
+!CMakeLists.txt
+!*/CMakeLists.txt
+!*/*/CMakeLists.txt
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.pdb
+*.ilk
+*.exp
+
+# Rust / Cargo
+target/
+Cargo.lock
+
+# Node.js / Web / Desktop
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Models & Large Data Files
+*.gguf
+*.gguf.part
+*.bin
+*.safetensors
+/models/
+android/app/src/main/assets/models/*.gguf
+
+# Logs & Temporary Data
+*.log
+logs/
+.system_generated/
+scratch/

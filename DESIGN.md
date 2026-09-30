@@ -242,6 +242,22 @@ The inference core wraps llama.cpp, providing a clean interface for model loadin
 | Model health check | ✅ | Verify model loads and can process a small prompt |
 | Inference statistics | ✅ | Timing data from `llama_perf_context()` |
 
+### 3.2.1 Upstream llama.cpp API Alignment (Pinned Commit 931351ea5)
+
+During implementation of the native core (`omnimind_core.cpp`), the upstream `llama.cpp` API was inspected directly from headers (`llama.h`, `gguf.h`, `ggml.h`). The following API adaptations were made to align with the current llama.cpp architecture:
+
+1. **Model Loading Parameters (`llama_model_params`)**:
+   - `use_mmap` and `use_mlock` booleans have evolved into `enum llama_load_mode load_mode` (`LLAMA_LOAD_MODE_MMAP`, `LLAMA_LOAD_MODE_MLOCK`, `LLAMA_LOAD_MODE_MMAP_MLOCK`).
+   - Configured in `omnimind_core.cpp` via `mparams.load_mode = LLAMA_LOAD_MODE_MMAP;`.
+2. **KV Cache Management**:
+   - Context clearing is handled via `llama_memory_clear(llama_get_memory(ctx), true)` rather than legacy helpers.
+3. **Sampling Chain Penalties**:
+   - `llama_sampler_init_penalties` requires 5 arguments: `(n_vocab, penalty_last_n, penalty_repeat, penalty_freq, penalty_present)`.
+4. **GGUF Tensor Dimensions**:
+   - `gguf_get_tensor_ne(ctx, tensor_id)` returns `const int64_t* ne`, queried with 2 arguments.
+5. **Chat Templates**:
+   - Model chat templates are evaluated dynamically using `llama_chat_apply_template()` directly from the model's embedded `tokenizer.chat_template` GGUF key, ensuring zero hardcoded model formatting.
+
 ### 3.3 Backend Detection and Fallback
 
 ```

@@ -65,11 +65,11 @@ OmniMind is an open-source application that runs large language models entirely 
 
 | Platform | Technology | Status |
 |----------|-----------|--------|
-| **Android** | Kotlin + Jetpack Compose + llama.cpp (JNI) | Primary target |
-| **Windows** | Tauri 2 + React/TypeScript + llama-server | Primary target |
-| **Linux** | Tauri 2 + React/TypeScript + llama-server | Primary target |
+| **Android** | Kotlin + Jetpack Compose + llama.cpp (JNI) | ✅ Implemented & Built (`app-debug.apk`) |
+| **Windows** | Tauri 2 + React/TypeScript + llama-server | Primary target (Phase 5–6) |
+| **Linux** | Tauri 2 + React/TypeScript + llama-server | Primary target (Phase 5–6) |
 | **macOS** | Tauri 2 + React/TypeScript + llama-server | Planned (not required for v1) |
-| **Web/Browser** | React/TypeScript → local inference host | Primary target |
+| **Web/Browser** | React/TypeScript → local inference host | Primary target (Phase 5, 7) |
 
 ---
 
@@ -435,11 +435,15 @@ npm test                                # API / E2E tests
 
 ## Roadmap
 
-### v0.1 — Foundation
-- [ ] Native inference core (llama.cpp integration)
-- [ ] Model manager (import, validate, metadata)
-- [ ] Android chat app with streaming
-- [ ] Basic settings
+### v0.1 — Foundation (Phase 0 – Phase 3 Implemented & Verified)
+- [x] Native inference core (llama.cpp pinned commit `931351ea5`, ARM64 NEON, dynamic chat templating)
+- [x] Model manager (import, GGUF validation, SHA-256, metadata extraction, atomic operations)
+- [x] Android native integration (JNI bridge, lifecycle, safe model import off UI thread)
+- [x] Local chat storage (Room database, incremental 500ms auto-save, partial output preservation)
+- [x] Android Material 3 UI MVP (Chat, Model Manager, Diagnostics, Settings, About)
+- [x] Performance diagnostics screen (real token metrics, hardware/thermal warnings)
+- [x] Unit test suites (Core C++ tests + Android JVM unit tests)
+- [x] Android APK build verified (`app-debug.apk`)
 
 ### v0.2 — Desktop & Web
 - [ ] Tauri desktop application

@@ -1,0 +1,37 @@
+{
+  "name": "OmniMind",
+  "version": "0.1.0-alpha.1",
+  "versionCode": 1,
+  "description": "Local-first cross-platform LLM chat application powered by llama.cpp",
+  "license": "Apache-2.0",
+  "author": "Girish675 <pediredlagirishkumar@gmail.com>",
+  "repository": "https://github.com/Girish675/OmniMind.git",
+  "nativeCore": {
+    "engine": "llama.cpp",
+    "pinnedCommit": "931351ea50dfdd3ee249606f655eef2e9a629daf",
+    "referenceModel": {
+      "family": "Qwen3",
+      "model": "Qwen3-4B",
+      "format": "GGUF",
+      "quantization": "Q4_K_M",
+      "repo": "Qwen/Qwen3-4B-GGUF"
+    }
+  },
+  "targets": {
+    "android": {
+      "minSdk": 29,
+      "targetSdk": 35,
+      "compileSdk": 35,
+      "abi": ["arm64-v8a"],
+      "deviceTarget": "Motorola Edge 60 Stylus (Snapdragon 7s Gen 2 / Adreno 710 / 8GB RAM / Android 15)"
+    },
+    "desktop": {
+      "framework": "Tauri 2",
+      "inferenceHost": "llama-server"
+    },
+    "web": {
+      "framework": "React / Vite SPA",
+      "inferenceHost": "Local HTTP/SSE"
+    }
+  }
+}
